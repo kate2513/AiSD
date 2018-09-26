@@ -1,0 +1,3 @@
+0
+1000
+asd=12,FGT=67,juy=78,ERT=87,dfg=sfg=67,ty=78
