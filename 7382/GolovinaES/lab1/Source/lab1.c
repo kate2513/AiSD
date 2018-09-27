@@ -102,6 +102,7 @@ int main(){
 			string[strlen(string)-1]='\0';
 
 	//start of recursive functions
+	printf("\nADDITIONAL INFORMATION\n");
 	result=list_of_parametrs(string,&index,&file);
 	fclose(file);
 

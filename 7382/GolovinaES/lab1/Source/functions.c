@@ -31,6 +31,7 @@ int numbers(char * str, int index){
 		if (!isdigit(str[i]))
 			return 0;
 	}
+printf("%c %c = digit digit\n",str[index],str[index+1]);
 return 1;
 }
 
@@ -41,12 +42,14 @@ int name(char * str, int index){
 		if (!isalpha(str[i]))
 			return 0;
 	}
+printf("%c %c %c = letter letter letter\n",str[index],str[index+1],str[index+2]);
 return 1;
 }
 
 
 // Function, which check if string is parametr
 int parametr(char* str, int * index, FILE ** f){
+	int start_index=*index;
 	fprintf(*f,"parametr\n");
 	if (name(str,*index)){
 		(*index)+=3;
@@ -54,6 +57,10 @@ int parametr(char* str, int * index, FILE ** f){
 			(*index)++;
 			if (numbers(str,*index)){
 				(*index)+=2;
+				for (int i=start_index;i<*index;i++){
+					printf("%c",str[i]);
+				}
+				printf(" = parametr\n");
 				return 1;
 			}
 			else{
