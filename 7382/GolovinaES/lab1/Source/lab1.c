@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <limits.h>
 #include "functions.h"
-
-#define INT_MAX 32767
 
 
 int main(){
@@ -55,7 +54,7 @@ int main(){
 			length=strtol(l,&s,10);
 
 			//if data is written incorrectly in file - termination of the program
-			if (length<0 || length>INT_MAX || !length){
+			if (length<0 || length>SHRT_MAX || !length){
 			fputs("Incorrect data. Program is terminated.",stdout);
 			return 0;
 			}
