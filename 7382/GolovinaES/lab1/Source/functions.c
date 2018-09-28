@@ -64,8 +64,14 @@ int parametr(char* str, int * index, FILE ** f){
 				return 1;
 			}
 			else{
-				if (list_of_parametrs(str,index,f))
-					return 1;
+				if (str[*index]=='('){
+					(*index)++;
+					if (list_of_parametrs(str,index,f))
+						if (str[*index]==')'){
+							(*index)++;
+							return 1;
+						}
+				}
 			}
 		}
 	}
@@ -77,7 +83,7 @@ return 0;
 int list_of_parametrs(char * str, int * index, FILE ** f){
 	fprintf(*f,"list_of_parametrs\n");
 	if (parametr(str,index,f)){
-		if (str[*index]=='\0'){
+		if (str[*index]=='\0' || str[*index]==')'){
 			return 1;
 		}
 		else{
