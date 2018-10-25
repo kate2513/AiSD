@@ -1,5 +1,5 @@
 #!/bin/bash
-make Makefile
+g++ Source/lab3.cpp
 echo " "
 echo "Tests with correct data:"
 echo " "
@@ -45,4 +45,4 @@ echo " "
 echo "Test 10"
 echo " "
 ./a.out <./Tests/test10.txt
-make -f Makefile clean
+rm -f a.out
