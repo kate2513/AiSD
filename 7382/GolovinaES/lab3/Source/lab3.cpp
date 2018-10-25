@@ -69,12 +69,12 @@ struct Stack {
 
 
 int main(){
-	char symbol;
+	char symbol=0;
 	int * num = new int[3];
 	num[0]=-1;num[1]=-1;num[2]=-1;
 	char* str = new char[N];
 	int index=0,counter=0;
-	FILE * txt_file;
+	FILE * txt_file=NULL;
 
 	//choice of terminal or file mode
 	std::cout << "Type 1 to proceed in terminal, and 2 to use file.\n(else you will be forced to use file)" << std::endl;
