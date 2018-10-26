@@ -12,11 +12,11 @@ struct Stack {
 	//destructor
 	~Stack()
 	{
-		StackElem * temp;
-		while(topElem){
-			temp=topElem->next;
-			delete topElem;
-			topElem=temp;
+		StackElem * temp=topElem;
+		while(temp != NULL){
+			topElem=topElem->next;
+			delete temp;
+			temp=topElem;
 		}
 	}
 	//add element
@@ -29,9 +29,17 @@ struct Stack {
 	}
 	//remove element
 	Type pop(){
-		Type val = topElem->value;
-		topElem = topElem->next;
-	return val;
+		StackElem * temp=topElem;
+		if (topElem){
+			Type val = topElem->value;
+			topElem = topElem->next;
+			delete temp;
+			return val;
+		}
+		else{
+			std::cout << "Stack is empty!" << std::endl;
+			return 0;
+		}
 	}
 	//check emptiness
 	bool isEmpty(){
@@ -69,12 +77,12 @@ struct Stack {
 
 
 int main(){
-	char symbol=0;
+	char symbol;
 	int * num = new int[3];
 	num[0]=-1;num[1]=-1;num[2]=-1;
 	char* str = new char[N];
 	int index=0,counter=0;
-	FILE * txt_file=NULL;
+	FILE * txt_file;
 
 	//choice of terminal or file mode
 	std::cout << "Type 1 to proceed in terminal, and 2 to use file.\n(else you will be forced to use file)" << std::endl;
