@@ -1,5 +1,5 @@
 #!/bin/bash
-g++ Source/lab3.cpp
+make
 echo " "
 echo "Tests with correct data:"
 echo " "
@@ -41,8 +41,4 @@ echo " "
 echo "Test 9"
 echo " "
 ./a.out <./Tests/test9.txt
-echo " "
-echo "Test 10"
-echo " "
-./a.out <./Tests/test10.txt
-rm -f a.out
+make clean
