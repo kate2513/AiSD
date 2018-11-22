@@ -34,7 +34,7 @@ std::cout << "Type 1 to proceed in terminal, and 2 to use file.\n(else you will 
 		file.close();
 	}
 
-std::cout << "Your output is " << str_bt << std::endl;
+std::cout << "\nYour output is " << str_bt << std::endl;
 
 //length of the string
 length=str_bt.length();
@@ -60,6 +60,8 @@ if (!bt_depth){
 
 //counting maximum numbers of elements in tree (2^bt_depth - 1)
 elMax=(int)pow(2.0,(double)bt_depth)-1;
+
+std::cout << "\nAdditional steps:" << std::endl;
 
 //creation of bin tree class
 binTree<char> user_bt(bt_depth);

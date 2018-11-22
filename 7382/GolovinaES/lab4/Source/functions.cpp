@@ -26,6 +26,7 @@ int fill_from_str(const binTree<char> * bt,const std::string str_bt, int * posit
 			if (str_bt[*position]=='#'){
 				(*position)++;
 				bt->storage[curr_pos].left=-1;
+				std::cout << "Father " << bt->storage[curr_pos].value << " has no left son."<< std::endl;
 				continue;
 			}
 			if (str_bt[*position]=='('){
@@ -36,11 +37,20 @@ int fill_from_str(const binTree<char> * bt,const std::string str_bt, int * posit
 			if (isalpha(str_bt[*position])){
 				bt->storage[curr_pos].value=str_bt[*position];
 				(*position)++;
-				if (root==-1)	continue;
-				if (curr_pos==left_son)
+				if (root==-1){
+					std::cout << bt->storage[curr_pos].value << " in the top of the tree." << std::endl;
+					continue;
+				}
+				if (curr_pos==left_son){
+					std::cout << "Father " << bt->storage[root].value;
+					std::cout << " has left son = " << bt->storage[curr_pos].value << std::endl;
 					bt->storage[root].left=left_son;
-				if (curr_pos==right_son)
+				}
+				if (curr_pos==right_son){
+					std::cout << "Father " << bt->storage[root].value;
+					std::cout << " has right son = " << bt->storage[curr_pos].value << std::endl;
 					bt->storage[root].right=right_son;
+				}
 				continue;
 			}
 			(*position)++;
