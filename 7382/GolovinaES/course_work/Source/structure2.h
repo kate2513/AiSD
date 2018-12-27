@@ -17,7 +17,6 @@ struct randTreap{
 		top = NULL;
 	}
 	~randTreap(){
-		std::cout << "Удаление элементов пирамиды:\n";
 		if (top)
 			randTreap::clean(top);
 	}
@@ -27,7 +26,6 @@ struct randTreap{
 			randTreap::clean(temp->left);
 		if (temp->right)
 			randTreap::clean(temp->right);
-		std::cout << "Удаление (" << temp->key <<"; "<< temp->priority <<")\n";
 		delete temp;
 	}
 	//adding new node, with correction
@@ -36,7 +34,7 @@ struct randTreap{
 				std::cout << "Место для нового элемента (по ключу) найдено!\n";
 				*temp = new node;
 				(*temp)->key=key;
-				(*temp)->priority=(double)(rand() % 10)/10;
+				(*temp)->priority=(double)((rand() % 10)+1)/10;
 				std::cout << "Сгенерирован приоритет = "<< (*temp)->priority<<"\n";
 				(*temp)->left=NULL;
 				(*temp)->right=NULL;
@@ -68,6 +66,41 @@ struct randTreap{
 				std::cout << "Новый ключ ("<<key<<") больше " << (*temp)->key <<". Переходим на правую ветвь.\n";
 				randTreap::insert(key,&((*temp)->right));
 			}
+	}
+	void deleteEl(elem key, node ** ptr_to_top){
+		node * temp=randTreap::search(*(ptr_to_top),key);
+		if (temp){
+			std::cout << "Удаление элемента " << key <<" из БДП\n";
+			if (temp->left == NULL && temp->right==NULL){
+				std::cout << "Удаляемый элемент - лист, значит можно его удалить\n";
+			}
+			else{
+				std::cout << "Удаляемый элемент - не лист, сделаем его листом\n"
+					<< "Для этого в его приоритет запишем 0.0\n"
+					<< "Поворотами восставновим свойство пирамиды в БДП и сделаем элемент листом\n";
+				temp->priority=0.0;
+				std::cout << "Вид пирамиды до поворота:\n";
+				randTreap::print(top,randTreap::height(top));
+				
+				while(!(randTreap::iscorrect(top))){
+					randTreap::check_heap(&top);
+					std::cout << "Вид пирамиды после поворота:\n";
+					randTreap::print(top,randTreap::height(top));
+				}
+				std::cout << "Теперь элемент " << key << " - лист, его можно удалять!\n";
+				temp=randTreap::search(*(ptr_to_top),key);
+			}
+			node * father=randTreap::find_father(*(ptr_to_top),key,NULL);
+			if (father->left == temp) father->left=NULL;
+			if (father->right == temp) father->right=NULL;
+			delete temp;
+			std::cout << "Вид пирамиды после удаления:\n";
+			randTreap::print(top,randTreap::height(top));
+		}
+		else{
+			std::cout << "Данного элемента нет - удалять нечего!\n";
+			return;
+		}
 	}
 	//changing treap to correct one
 	void check_heap(node ** temp, double max=1.0){
@@ -174,11 +207,21 @@ struct randTreap{
 		delete [] node_str;
 	}
 	//searching for the key
-	bool search(node * temp,elem key){
-		if (!temp) return false;
-		if (temp->key == key) return true;
+	node * search(node * temp,elem key){
+		if (!temp) return NULL;
+		if (temp->key == key) return temp;
 		else if (key< temp->key) randTreap::search(temp->left,key);
 		else if (key > temp->key) randTreap::search(temp->right,key);
 	//	else return randTreap::search(temp->left,key) || randTreap::search(temp->right,key);
+	}
+	node * find_father(node * temp, elem key, node * father){
+		if (!temp) return NULL;
+		if (temp->key == key) return father;
+		else if (key< temp->key){
+			randTreap::find_father(temp->left,key,temp);
+		}
+		else if (key > temp->key){
+			randTreap::find_father(temp->right,key,temp);
+		}
 	}
 };

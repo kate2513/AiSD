@@ -1,5 +1,5 @@
 #!/bin/bash
-g++ ./Source/lab5.cpp
+g++ ./Source/lab5-2.cpp
 echo " "
 echo "Test 1"
 echo " "

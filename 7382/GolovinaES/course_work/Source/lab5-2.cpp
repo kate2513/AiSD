@@ -5,7 +5,7 @@
 #include <cstdlib>
 #include <string>
 #include <ctime>
-#include "structure.h"
+#include "structure2.h"
 #include <clocale>
 
 int main(){
@@ -88,6 +88,12 @@ int main(){
 		std::cout << "Пирамида с новым элементом:\n";
 		my_treap.print(my_treap.top,my_treap.height(my_treap.top));
 	}
+	std::cout << "Введите ключ (целое число), которое вы хотите удалить: ";
+	std::cin >> new_key;
+	std::cout << std::endl;
+	my_treap.deleteEl(new_key,&(my_treap.top));
+	
+
 return 0;
 }
 
